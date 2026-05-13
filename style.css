@@ -1,0 +1,347 @@
+:root {
+    --bg-dark: #020617;
+    --accent-blue: #3b82f6;
+    --text-main: #f8fafc;
+    --text-dim: #94a3b8;
+    --glass: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.08);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--bg-dark);
+    color: var(--text-main);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* Scroll Progress */
+.scroll-progress-container {
+    position: fixed;
+    top: 0;
+    z-index: 2100;
+    width: 100%;
+    height: 4px;
+    background: transparent;
+}
+
+.progress-bar {
+    height: 100%;
+    background: var(--accent-blue);
+    width: 0%;
+    box-shadow: 0 0 15px var(--accent-blue);
+}
+
+/* Nav & Logo Fix (Inline) */
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 2000;
+    background: rgba(2, 6, 23, 0.8);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.logo-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap;
+}
+
+.main-logo {
+    height: 38px;
+    width: auto;
+}
+
+.brand-name {
+    font-weight: 800;
+    font-size: 1.15rem;
+    letter-spacing: 0.5px;
+}
+
+/* Status Indicator */
+.status-tag {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 4px 10px;
+    border-radius: 50px;
+    font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid var(--glass-border);
+    margin-left: 5px;
+}
+
+.dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+}
+
+.online {
+    background: #22c55e;
+    box-shadow: 0 0 8px #22c55e;
+}
+
+.offline {
+    background: #ef4444;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+}
+
+.nav-link {
+    color: var(--text-main);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+/* Hero */
+.header {
+    height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.video-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.bg-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(2, 6, 23, 0.5) 0%, rgba(2, 6, 23, 0.95) 100%);
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 10;
+    padding: 0 20px;
+}
+
+.typing-title {
+    font-size: clamp(2rem, 8vw, 4.5rem);
+    font-weight: 800;
+}
+
+.typing-title span {
+    background: linear-gradient(to right, #60a5fa, #3b82f6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Stats */
+.stats-section {
+    padding: 60px 0;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    text-align: center;
+}
+
+.counter {
+    font-size: 3rem;
+    color: var(--accent-blue);
+    font-weight: 800;
+}
+
+/* About Card */
+.glass-card {
+    background: var(--glass);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 2rem;
+    padding: 2.5rem;
+}
+
+.about-text span {
+    color: var(--accent-blue);
+    font-weight: 700;
+}
+
+/* Product Cards (3D Tilt) */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.product-card {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 20px;
+    transform-style: preserve-3d;
+    transition: 0.3s;
+}
+
+.product-img-box {
+    height: 180px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    margin-bottom: 15px;
+}
+
+.price-btn {
+    display: inline-block;
+    padding: 8px 20px;
+    border: 1px solid var(--accent-blue);
+    border-radius: 50px;
+    color: var(--accent-blue);
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+/* Contact Grid & Map */
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 30px;
+}
+
+.hours-list {
+    list-style: none;
+    margin-top: 15px;
+}
+
+.hours-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--glass-border);
+    font-size: 0.9rem;
+}
+
+.closed {
+    color: #f87171;
+}
+
+.mt-2 {
+    margin-top: 20px;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.info-item i {
+    color: var(--accent-blue);
+}
+
+.map-container {
+    height: 400px;
+    padding: 0 !important;
+    overflow: hidden;
+}
+
+.map-container iframe {
+    filter: invert(90%) hue-rotate(180deg);
+}
+
+/* Floating Socials */
+.social-float-container {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 2000;
+}
+
+.social-float {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+    transition: 0.3s;
+}
+
+.fb-float {
+    background: #1877F2;
+}
+
+.wa-float {
+    background: #25D366;
+}
+
+.footer {
+    text-align: center;
+    padding: 40px;
+    border-top: 1px solid var(--glass-border);
+    color: var(--text-dim);
+}
+
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .logo-wrap {
+        width: 100%;
+    }
+
+    .brand-name {
+        font-size: 1rem;
+    }
+}

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEW ANURA STORES | Elite Experience</title>
+
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- Animation Libraries -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- 5. Scroll Progress Bar -->
+    <div class="scroll-progress-container">
+        <div class="progress-bar" id="myBar"></div>
+    </div>
+
+    <!-- Floating Social Buttons -->
+    <div class="social-float-container">
+        <a href="#" class="social-float fb-float" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://wa.me/94412291221" class="social-float wa-float" target="_blank"><i
+                class="fab fa-whatsapp"></i></a>
+    </div>
+
+    <header class="header">
+        <div class="video-container">
+            <video autoplay muted loop playsinline class="bg-video">
+                <source src="bg-video.mp4" type="video/mp4">
+            </video>
+            <div class="grain-overlay"></div>
+            <div class="video-overlay"></div>
+        </div>
+
+        <nav class="nav-container">
+            <!-- Logo සහ නම එකම පේළියක (Fix) -->
+            <div class="logo-wrap">
+                <img src="logo.png" alt="Logo" class="main-logo">
+                <span class="brand-name">NEW ANURA STORES</span>
+                <!-- 2. Live Status Indicator -->
+                <div id="status-indicator" class="status-tag"></div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#products" class="nav-link">Products</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </nav>
+
+        <div class="hero">
+            <div class="hero-content">
+                <h1 class="typing-title">WELCOME TO <br><span>NEW ANURA STORES</span></h1>
+                <p data-aos="fade-up" data-aos-delay="800">Quality Products & Exceptional Service by Anura Witharana</p>
+                <div data-aos="fade-up" data-aos-delay="1000">
+                    <a href="#products" class="btn-primary">View Products</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- 3. Animated Statistics Section -->
+        <section class="stats-section">
+            <div class="container stats-grid">
+                <div class="stat-item" data-aos="zoom-in">
+                    <h2 class="counter" data-target="15">0</h2>
+                    <p>Years of Excellence</p>
+                </div>
+                <div class="stat-item" data-aos="zoom-in" data-aos-delay="200">
+                    <h2 class="counter" data-target="5000">0</h2>
+                    <p>Happy Customers</p>
+                </div>
+                <div class="stat-item" data-aos="zoom-in" data-aos-delay="400">
+                    <h2 class="counter" data-target="100">0</h2>
+                    <p>Premium Products</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section (නැවත එක් කරන ලදී) -->
+        <section id="about" class="section">
+            <div class="container">
+                <h2 class="section-title" data-aos="fade-up">About Us</h2>
+                <div class="about-card glass-card" data-aos="fade-up">
+                    <p class="about-text">
+                        "New Anura Stores වෙත ඔබව සාදරයෙන් පිළිගනිමු! මෙහි හිමිකරු වන <span>අනුර විතාරණ</span> වන මම,
+                        වසර ගණනාවක අත්දැකීම් සමඟින් අපගේ පාරිභෝගිකයන් හට විශිෂ්ටතම සේවාවක් ලබාදීමට කැපවී සිටිමි."
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 1. 3D Tilt Product Showcase -->
+        <section id="products" class="section bg-alt">
+            <div class="container">
+                <h2 class="section-title" data-aos="fade-up">Our Featured Products</h2>
+                <div class="product-grid">
+                    <div class="product-card" data-aos="fade-up" data-tilt>
+                        <div class="product-img-box"><img src="p1.jpg" alt="Product"></div>
+                        <div class="product-info">
+                            <h3>Household Items</h3>
+                            <p>Premium quality tools and items for your home.</p>
+                            <span class="price-btn">Details</span>
+                        </div>
+                    </div>
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="200" data-tilt>
+                        <div class="product-img-box"><img src="p2.jpg" alt="Product"></div>
+                        <div class="product-info">
+                            <h3>Stationary</h3>
+                            <p>High-end office and school supplies.</p>
+                            <span class="price-btn">Details</span>
+                        </div>
+                    </div>
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="400" data-tilt>
+                        <div class="product-img-box"><img src="p3.jpg" alt="Product"></div>
+                        <div class="product-info">
+                            <h3>Gift Items</h3>
+                            <p>Special gifts for every memorable occasion.</p>
+                            <span class="price-btn">Details</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact & Business Info (සියලුම විස්තර සහිතව) -->
+        <section id="contact" class="section">
+            <div class="container">
+                <h2 class="section-title" data-aos="fade-up">Find Us & Contact</h2>
+                <div class="contact-grid">
+                    <div class="contact-sidebar">
+                        <!-- ව්‍යාපාරික වේලාවන් (නැවත එක් කරන ලදී) -->
+                        <div class="glass-card info-box" data-aos="fade-right">
+                            <h3>Business Hours</h3>
+                            <ul class="hours-list">
+                                <li><span>Monday - Friday</span> <span>8:00 AM - 8:00 PM</span></li>
+                                <li><span>Saturday</span> <span>9:00 AM - 6:00 PM</span></li>
+                                <li><span>Sunday</span> <span class="closed">Closed</span></li>
+                            </ul>
+                        </div>
+                        <div class="glass-card info-box mt-2" data-aos="fade-right" data-aos-delay="200">
+                            <h3>Quick Contact</h3>
+                            <div class="info-item"><i class="fas fa-phone-alt"></i>
+                                <p>+94 41 22 91 221</p>
+                            </div>
+                            <div class="info-item"><i class="fas fa-envelope"></i>
+                                <p>anurawitharana47@gmail.com</p>
+                            </div>
+                            <div class="info-item"><i class="fas fa-map-marker-alt"></i>
+                                <p>Mawarala, Sri Lanka</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Map -->
+                    <div class="map-container glass-card" data-aos="fade-left">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3967.6!2d80.6050!3d6.1234!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sMawarala!5e0!3m2!1sen!2slk!4v1700000000000"
+                            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 NEW ANURA STORES. All rights reserved. | Managed by Miyuru Witharana</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true });
+
+        // 5. Scroll Progress Bar logic
+        window.onscroll = function () {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById("myBar").style.width = scrolled + "%";
+        };
+
+        // 2. Live Status Indicator logic
+        function updateStatus() {
+            const hour = new Date().getHours();
+            const statusIndicator = document.getElementById('status-indicator');
+            if (hour >= 8 && hour < 20) {
+                statusIndicator.innerHTML = '<span class="dot online"></span> Open Now';
+            } else {
+                statusIndicator.innerHTML = '<span class="dot offline"></span> Closed';
+            }
+        }
+        updateStatus();
+
+        // 3. Counting Animation logic
+        const counters = document.querySelectorAll('.counter');
+        const counterObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target;
+                    const target = +counter.getAttribute('data-target');
+                    let count = 0;
+                    const update = () => {
+                        const inc = target / 100;
+                        if (count < target) {
+                            count += inc;
+                            counter.innerText = Math.ceil(count);
+                            setTimeout(update, 20);
+                        } else { counter.innerText = target + "+"; }
+                    };
+                    update();
+                    observer.unobserve(counter);
+                }
+            });
+        }, { threshold: 1 });
+        counters.forEach(c => counterObserver.observe(c));
+    </script>
+</body>
+
+</html>
