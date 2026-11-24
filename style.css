@@ -81,32 +81,61 @@ html {
     letter-spacing: 0.5px;
 }
 
-/* Status Indicator */
+/* Live Status Indicator */
 .status-tag {
     background: rgba(255, 255, 255, 0.05);
-    padding: 4px 10px;
+    padding: 5px 12px;
     border-radius: 50px;
-    font-size: 0.7rem;
+    font-size: 0.72rem;
+    font-weight: 600;
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 7px;
     border: 1px solid var(--glass-border);
-    margin-left: 5px;
+    margin-left: 6px;
+    transition: all 0.3s ease;
+}
+
+.status-tag.is-open {
+    background: rgba(34, 197, 94, 0.12);
+    border-color: rgba(34, 197, 94, 0.35);
+    color: #bbf7d0;
+}
+
+.status-tag.is-closed {
+    background: rgba(239, 68, 68, 0.12);
+    border-color: rgba(239, 68, 68, 0.35);
+    color: #fecaca;
 }
 
 .dot {
-    width: 7px;
-    height: 7px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
+    flex-shrink: 0;
 }
 
 .online {
     background: #22c55e;
     box-shadow: 0 0 8px #22c55e;
+    animation: pulse-green 1.8s infinite;
 }
 
 .offline {
     background: #ef4444;
+    box-shadow: 0 0 8px rgba(239, 68, 68, 0.6);
+}
+
+@keyframes pulse-green {
+    0% {
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 7px rgba(34, 197, 94, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+    }
 }
 
 .nav-links {
@@ -252,12 +281,188 @@ html {
 
 .price-btn {
     display: inline-block;
-    padding: 8px 20px;
+    padding: 8px 22px;
+    background: transparent;
     border: 1px solid var(--accent-blue);
     border-radius: 50px;
     color: var(--accent-blue);
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
     cursor: pointer;
     margin-top: 10px;
+    transition: all 0.25s ease;
+}
+
+.price-btn:hover {
+    background: var(--accent-blue);
+    color: #ffffff;
+    box-shadow: 0 0 16px rgba(59, 130, 246, 0.45);
+}
+
+/* Popup Modal */
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(2, 6, 23, 0.82);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 3000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.modal-backdrop.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-card {
+    position: relative;
+    width: 100%;
+    max-width: 540px;
+    background: rgba(15, 23, 42, 0.96);
+    border: 1px solid rgba(59, 130, 246, 0.4);
+    border-radius: 24px;
+    padding: 32px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65), 0 0 30px rgba(59, 130, 246, 0.18);
+    transform: translateY(18px) scale(0.97);
+    transition: transform 0.25s ease;
+}
+
+.modal-backdrop.active .modal-card {
+    transform: translateY(0) scale(1);
+}
+
+.modal-close {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--glass-border);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-main);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+}
+
+.modal-close:hover {
+    background: rgba(239, 68, 68, 0.2);
+    border-color: rgba(239, 68, 68, 0.5);
+    color: #fca5a5;
+}
+
+.modal-badge {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #60a5fa;
+    background: rgba(59, 130, 246, 0.14);
+    border: 1px solid rgba(59, 130, 246, 0.35);
+    padding: 4px 12px;
+    border-radius: 50px;
+    margin-bottom: 12px;
+}
+
+.modal-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 4px;
+}
+
+.modal-subtitle {
+    font-size: 0.92rem;
+    color: #60a5fa;
+    margin-bottom: 14px;
+}
+
+.modal-desc {
+    font-size: 0.95rem;
+    color: var(--text-dim);
+    margin-bottom: 18px;
+    line-height: 1.65;
+}
+
+.modal-highlights {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 24px;
+    padding: 14px 16px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    border-radius: 14px;
+}
+
+.modal-highlights li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: var(--text-main);
+}
+
+.modal-highlights li i {
+    color: var(--accent-blue);
+    margin-top: 4px;
+    flex-shrink: 0;
+}
+
+.modal-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.modal-wa-btn {
+    flex: 1;
+    min-width: 190px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 11px 20px;
+    border-radius: 50px;
+    background: #25D366;
+    color: #020617;
+    font-weight: 700;
+    font-size: 0.92rem;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.modal-wa-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.35);
+}
+
+.modal-secondary-btn {
+    padding: 11px 22px;
+    border-radius: 50px;
+    border: 1px solid var(--glass-border);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-main);
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.modal-secondary-btn:hover {
+    border-color: var(--accent-blue);
+    color: #93c5fd;
 }
 
 /* Contact Grid & Map */
@@ -275,9 +480,17 @@ html {
 .hours-list li {
     display: flex;
     justify-content: space-between;
-    padding: 8px 0;
+    padding: 8px 10px;
+    border-radius: 8px;
     border-bottom: 1px solid var(--glass-border);
     font-size: 0.9rem;
+    transition: background 0.3s ease;
+}
+
+.hours-list li.today-row {
+    background: rgba(59, 130, 246, 0.14);
+    border-left: 3px solid var(--accent-blue);
+    font-weight: 600;
 }
 
 .closed {
@@ -358,9 +571,21 @@ html {
 
     .logo-wrap {
         width: 100%;
+        flex-wrap: wrap;
+        gap: 6px;
     }
 
     .brand-name {
-        font-size: 1rem;
+        font-size: 0.95rem;
+    }
+
+    .status-tag {
+        font-size: 0.65rem;
+        padding: 3px 8px;
+        margin-left: 0;
+    }
+
+    .modal-card {
+        padding: 24px 20px;
     }
 }
