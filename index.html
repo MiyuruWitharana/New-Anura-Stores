@@ -114,6 +114,8 @@
                         With many years of continuous experience, we remain fully committed to providing you, our valued customers,
                         with the same excellent service today and in the future, just as we have always done."
                     </p>
+
+            
                 </div>
             </div>
         </section>
@@ -132,7 +134,7 @@
                         <div class="product-info">
                             <h3>Business Representative</h3>
                             <p>Sales representation of business brands that have proven their excellence in the world.</p>
-                            <a href="service-details.html?service=business" class="price-btn">Details</a>
+                            <a href="business-representative.html" class="price-btn">Details</a>
                         </div>
                     </div>
                     <div class="product-card" data-aos="fade-up" data-aos-delay="200" data-tilt>
@@ -144,7 +146,7 @@
                         <div class="product-info">
                             <h3>Wholesale And Retail Workforce</h3>
                             <p>A pioneer in meeting the wholesale and retail needs of the consumer.</p>
-                            <a href="service-details.html?service=workforce" class="price-btn">Details</a>
+                            <a href="wholesale-retail.html" class="price-btn">Details</a>
                         </div>
                     </div>
                     <div class="product-card" data-aos="fade-up" data-aos-delay="400" data-tilt>
@@ -156,7 +158,7 @@
                         <div class="product-info">
                             <h3>Social Welfare</h3>
                             <p>A pioneer in everything society needs—including art and acts of self-sacrifice.</p>
-                            <a href="service-details.html?service=welfare" class="price-btn">Details</a>
+                            <a href="social-welfare.html" class="price-btn">Details</a>
                         </div>
                     </div>
                 </div>
@@ -222,7 +224,7 @@
         // 2. Live Status Indicator logic (Sri Lanka Time + Weekday/Saturday/Sunday Schedule)
         function updateStatus() {
             const slNow = new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Colombo" }));
-            const day = slNow.getDay(); // 0 = Sunday, 1-5 = Mon-Fri, 6 = Saturday
+            const day = slNow.getDay();
             const hour = slNow.getHours();
             const statusIndicator = document.getElementById('status-indicator');
 
@@ -257,7 +259,6 @@
                 statusIndicator.innerHTML = `<span class="dot offline"></span> ${statusText}`;
             }
 
-            // Highlight today's row in Business Hours
             document.querySelectorAll(".hours-list li").forEach(li => li.classList.remove("today-row"));
             if (day >= 1 && day <= 5) {
                 document.querySelector('.hours-list li[data-day="1-5"]')?.classList.add("today-row");
