@@ -286,6 +286,7 @@ html {
     border: 1px solid var(--accent-blue);
     border-radius: 50px;
     color: var(--accent-blue);
+    text-decoration: none;
     font-family: inherit;
     font-size: 0.9rem;
     font-weight: 600;
@@ -300,70 +301,108 @@ html {
     box-shadow: 0 0 16px rgba(59, 130, 246, 0.45);
 }
 
-/* Popup Modal */
-.modal-backdrop {
-    position: fixed;
-    inset: 0;
-    background: rgba(2, 6, 23, 0.82);
-    backdrop-filter: blur(10px);
-    display: flex;
+/* Service Details Page */
+.details-main {
+    min-height: 100vh;
+    padding: 115px 0 70px;
+    background:
+        radial-gradient(circle at 15% 15%, rgba(59, 130, 246, 0.16), transparent 45%),
+        radial-gradient(circle at 85% 25%, rgba(37, 99, 235, 0.12), transparent 45%),
+        var(--bg-dark);
+}
+
+.details-top-bar {
+    margin-bottom: 24px;
+}
+
+.back-home-btn {
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
+    gap: 8px;
+    padding: 9px 18px;
+    border-radius: 50px;
+    border: 1px solid rgba(59, 130, 246, 0.35);
+    background: rgba(15, 23, 42, 0.75);
+    color: var(--text-main);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.25s ease;
+}
+
+.back-home-btn:hover {
+    border-color: var(--accent-blue);
+    color: #93c5fd;
+    transform: translateX(-2px);
+}
+
+.details-layout {
+    display: grid;
+    grid-template-columns: 1.05fr 1.25fr;
+    gap: 32px;
+    align-items: start;
+}
+
+.details-media-card {
+    background: rgba(15, 23, 42, 0.78);
+    border: 1px solid rgba(59, 130, 246, 0.28);
+    border-radius: 24px;
     padding: 20px;
-    z-index: 3000;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.25s ease, visibility 0.25s ease;
+    backdrop-filter: blur(12px);
 }
 
-.modal-backdrop.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-.modal-card {
-    position: relative;
+.details-video-frame {
     width: 100%;
-    max-width: 540px;
-    background: rgba(15, 23, 42, 0.96);
-    border: 1px solid rgba(59, 130, 246, 0.4);
+    height: 280px;
+    border-radius: 16px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.04);
+    margin-bottom: 16px;
+}
+
+.details-video-frame video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.details-switch-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.service-pill {
+    padding: 7px 14px;
+    border-radius: 50px;
+    border: 1px solid var(--glass-border);
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.service-pill:hover,
+.service-pill.active {
+    border-color: var(--accent-blue);
+    background: rgba(59, 130, 246, 0.18);
+    color: #ffffff;
+}
+
+.details-content-card {
+    background: rgba(15, 23, 42, 0.78);
+    border: 1px solid rgba(59, 130, 246, 0.3);
     border-radius: 24px;
     padding: 32px;
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65), 0 0 30px rgba(59, 130, 246, 0.18);
-    transform: translateY(18px) scale(0.97);
-    transition: transform 0.25s ease;
+    backdrop-filter: blur(12px);
 }
 
-.modal-backdrop.active .modal-card {
-    transform: translateY(0) scale(1);
-}
-
-.modal-close {
-    position: absolute;
-    top: 18px;
-    right: 18px;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    border: 1px solid var(--glass-border);
-    background: rgba(255, 255, 255, 0.05);
-    color: var(--text-main);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: 0.2s;
-}
-
-.modal-close:hover {
-    background: rgba(239, 68, 68, 0.2);
-    border-color: rgba(239, 68, 68, 0.5);
-    color: #fca5a5;
-}
-
-.modal-badge {
+.details-badge {
     display: inline-block;
-    font-size: 0.72rem;
+    font-size: 0.74rem;
     font-weight: 700;
     letter-spacing: 0.08em;
     color: #60a5fa;
@@ -374,65 +413,62 @@ html {
     margin-bottom: 12px;
 }
 
-.modal-title {
-    font-size: 1.5rem;
+.details-title {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
     font-weight: 800;
-    margin-bottom: 4px;
+    margin-bottom: 6px;
 }
 
-.modal-subtitle {
-    font-size: 0.92rem;
+.details-subtitle {
+    font-size: 1rem;
     color: #60a5fa;
-    margin-bottom: 14px;
+    margin-bottom: 16px;
+    font-weight: 600;
 }
 
-.modal-desc {
-    font-size: 0.95rem;
+.details-desc {
     color: var(--text-dim);
-    margin-bottom: 18px;
-    line-height: 1.65;
+    font-size: 0.98rem;
+    line-height: 1.7;
+    margin-bottom: 22px;
 }
 
-.modal-highlights {
+.details-points {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    margin-bottom: 24px;
-    padding: 14px 16px;
+    gap: 12px;
+    margin-bottom: 26px;
+    padding: 18px;
+    border-radius: 16px;
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid var(--glass-border);
-    border-radius: 14px;
 }
 
-.modal-highlights li {
+.details-points li {
     display: flex;
     align-items: flex-start;
     gap: 10px;
-    font-size: 0.9rem;
-    color: var(--text-main);
+    font-size: 0.94rem;
 }
 
-.modal-highlights li i {
+.details-points li i {
     color: var(--accent-blue);
     margin-top: 4px;
     flex-shrink: 0;
 }
 
-.modal-actions {
+.details-cta-row {
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
 }
 
-.modal-wa-btn {
-    flex: 1;
-    min-width: 190px;
+.details-wa-btn {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
     gap: 8px;
-    padding: 11px 20px;
+    padding: 11px 22px;
     border-radius: 50px;
     background: #25D366;
     color: #020617;
@@ -442,27 +478,29 @@ html {
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.modal-wa-btn:hover {
+.details-wa-btn:hover {
     transform: translateY(-1px);
     box-shadow: 0 8px 20px rgba(37, 211, 102, 0.35);
 }
 
-.modal-secondary-btn {
+.details-call-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     padding: 11px 22px;
     border-radius: 50px;
-    border: 1px solid var(--glass-border);
-    background: rgba(255, 255, 255, 0.05);
-    color: var(--text-main);
-    font-family: inherit;
+    border: 1px solid var(--accent-blue);
+    background: rgba(59, 130, 246, 0.12);
+    color: #93c5fd;
     font-weight: 600;
-    font-size: 0.9rem;
-    cursor: pointer;
-    transition: 0.2s;
+    font-size: 0.92rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
 }
 
-.modal-secondary-btn:hover {
-    border-color: var(--accent-blue);
-    color: #93c5fd;
+.details-call-btn:hover {
+    background: var(--accent-blue);
+    color: #ffffff;
 }
 
 /* Contact Grid & Map */
@@ -565,7 +603,8 @@ html {
         display: none;
     }
 
-    .contact-grid {
+    .contact-grid,
+    .details-layout {
         grid-template-columns: 1fr;
     }
 
@@ -585,7 +624,8 @@ html {
         margin-left: 0;
     }
 
-    .modal-card {
-        padding: 24px 20px;
+    .details-content-card,
+    .details-media-card {
+        padding: 22px 18px;
     }
 }
