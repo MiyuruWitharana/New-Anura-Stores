@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Welfare | NEW ANURA STORES</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="scroll-progress-container">
+        <div class="progress-bar" id="myBar"></div>
+    </div>
+
+    <div class="social-float-container">
+        <a href="#" class="social-float fb-float" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://wa.me/94412291221" class="social-float wa-float" target="_blank"><i
+                class="fab fa-whatsapp"></i></a>
+    </div>
+
+    <nav class="nav-container">
+        <div class="logo-wrap">
+            <a href="index.html" style="display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit;">
+                <img src="logo.png" alt="Logo" class="main-logo">
+                <span class="brand-name">NEW ANURA STORES</span>
+            </a>
+            <div id="status-indicator" class="status-tag"></div>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html#about" class="nav-link">About</a></li>
+            <li><a href="index.html#products" class="nav-link">Products</a></li>
+            <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+        </ul>
+    </nav>
+
+    <header class="subpage-header">
+        <div class="video-container">
+            <video autoplay muted loop playsinline class="bg-video">
+                <source src="bg-video.mp4" type="video/mp4">
+            </video>
+            <div class="video-overlay"></div>
+        </div>
+        <div class="subpage-hero-content">
+            <span class="subpage-tag">COMMUNITY, ARTS & SERVICE</span>
+            <h1 class="subpage-title">Social <span>Welfare</span></h1>
+            <p class="subpage-subtitle">සමාජ සුභසාධන සහ සංස්කෘතික සේවාව</p>
+        </div>
+    </header>
+
+    <main class="subpage-main">
+        <div class="container">
+            <div class="subpage-top-nav">
+                <a href="index.html#products" class="back-home-btn">
+                    <i class="fas fa-arrow-left"></i> Back to Home
+                </a>
+                <div class="subpage-tabs">
+                    <a href="business-representative.html" class="subpage-tab">Business Representative</a>
+                    <a href="wholesale-retail.html" class="subpage-tab">Wholesale & Retail</a>
+                    <a href="social-welfare.html" class="subpage-tab active">Social Welfare</a>
+                </div>
+            </div>
+
+            <div class="subpage-grid">
+                <div class="subpage-video-card">
+                    <div class="subpage-video-box">
+                        <video autoplay muted loop playsinline preload="metadata" poster="p2.jpg">
+                            <source src="p3.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <p class="subpage-side-note">
+                        Standing alongside the community in Mawarala and beyond through cultural encouragement, goodwill, and social responsibility.
+                    </p>
+                </div>
+
+                <div class="subpage-details-card">
+                    <h2>Community & Cultural Commitment</h2>
+                    <p>
+                        Beyond commerce, New Anura Stores takes pride in supporting social welfare initiatives, artistic and cultural activities, and acts of goodwill that enrich local community life.
+                    </p>
+                    <ul class="subpage-list">
+                        <li><i class="fas fa-check-circle"></i><span>Support for community welfare, charitable efforts, and public needs</span></li>
+                        <li><i class="fas fa-check-circle"></i><span>Encouragement for local arts, cultural programs, and community events</span></li>
+                        <li><i class="fas fa-check-circle"></i><span>Ongoing dedication to service and social responsibility</span></li>
+                    </ul>
+                    <div class="subpage-actions">
+                        <a href="https://wa.me/94412291221?text=Hello%20New%20Anura%20Stores%2C%20I%20would%20like%20to%20connect%20regarding%20Social%20Welfare%20initiatives."
+                            target="_blank" class="subpage-wa-btn">
+                            <i class="fab fa-whatsapp"></i> Inquire on WhatsApp
+                        </a>
+                        <a href="index.html#contact" class="subpage-outline-btn">
+                            <i class="fas fa-map-marker-alt"></i> Contact & Location
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 NEW ANURA STORES. All rights reserved. | Managed by Miyuru Witharana</p>
+    </footer>
+
+    <script>
+        window.onscroll = function () {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById("myBar").style.width = scrolled + "%";
+        };
+
+        function updateStatus() {
+            const slNow = new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Colombo" }));
+            const day = slNow.getDay();
+            const hour = slNow.getHours();
+            const statusIndicator = document.getElementById('status-indicator');
+
+            let isOpen = false;
+            let statusText = "Closed";
+
+            if (day >= 1 && day <= 5) {
+                if (hour >= 8 && hour < 20) {
+                    isOpen = true;
+                    statusText = "Open Now · Closes 8 PM";
+                } else {
+                    statusText = "Closed · Opens 8 AM";
+                }
+            } else if (day === 6) {
+                if (hour >= 9 && hour < 18) {
+                    isOpen = true;
+                    statusText = "Open Now · Closes 6 PM";
+                } else {
+                    statusText = hour < 9 ? "Closed · Opens 9 AM" : "Closed · Opens Mon 8 AM";
+                }
+            } else {
+                statusText = "Closed · Opens Mon 8 AM";
+            }
+
+            if (isOpen) {
+                statusIndicator.classList.remove("is-closed");
+                statusIndicator.classList.add("is-open");
+                statusIndicator.innerHTML = `<span class="dot online"></span> ${statusText}`;
+            } else {
+                statusIndicator.classList.remove("is-open");
+                statusIndicator.classList.add("is-closed");
+                statusIndicator.innerHTML = `<span class="dot offline"></span> ${statusText}`;
+            }
+        }
+        updateStatus();
+        setInterval(updateStatus, 60000);
+
+        document.querySelectorAll('video').forEach(vid => {
+            vid.muted = true;
+            vid.play().catch(() => {});
+        });
+    </script>
+</body>
+
+</html>
