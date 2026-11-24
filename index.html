@@ -147,7 +147,7 @@
                         <div class="product-info">
                             <h3>Business Representative</h3>
                             <p>Sales representation of business brands that have proven their excellence in the world.</p>
-                            <button type="button" class="price-btn open-modal-btn" data-service="business">Details</button>
+                            <a href="service-details.html?service=business" class="price-btn">Details</a>
                         </div>
                     </div>
                     <div class="product-card" data-aos="fade-up" data-aos-delay="200" data-tilt>
@@ -159,7 +159,7 @@
                         <div class="product-info">
                             <h3>Wholesale And Retail Workforce</h3>
                             <p>A pioneer in meeting the wholesale and retail needs of the consumer.</p>
-                            <button type="button" class="price-btn open-modal-btn" data-service="workforce">Details</button>
+                            <a href="service-details.html?service=workforce" class="price-btn">Details</a>
                         </div>
                     </div>
                     <div class="product-card" data-aos="fade-up" data-aos-delay="400" data-tilt>
@@ -171,7 +171,7 @@
                         <div class="product-info">
                             <h3>Social Welfare</h3>
                             <p>A pioneer in everything society needs—including art and acts of self-sacrifice.</p>
-                            <button type="button" class="price-btn open-modal-btn" data-service="welfare">Details</button>
+                            <a href="service-details.html?service=welfare" class="price-btn">Details</a>
                         </div>
                     </div>
                 </div>
@@ -215,26 +215,6 @@
             </div>
         </section>
     </main>
-
-    <!-- Service Details Popup Modal -->
-    <div id="serviceModal" class="modal-backdrop" aria-hidden="true">
-        <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-            <button type="button" class="modal-close" id="closeModalBtn" aria-label="Close modal">
-                <i class="fas fa-times"></i>
-            </button>
-            <div class="modal-badge" id="modalBadge">NEW ANURA STORES</div>
-            <h3 id="modalTitle" class="modal-title">Service Title</h3>
-            <p id="modalSubtitle" class="modal-subtitle">Sinhala subtitle</p>
-            <p id="modalDesc" class="modal-desc">Detailed description goes here.</p>
-            <ul id="modalHighlights" class="modal-highlights"></ul>
-            <div class="modal-actions">
-                <a id="modalWhatsappBtn" href="https://wa.me/94412291221" target="_blank" class="modal-wa-btn">
-                    <i class="fab fa-whatsapp"></i> Inquire on WhatsApp
-                </a>
-                <button type="button" class="modal-secondary-btn" id="modalDoneBtn">Close</button>
-            </div>
-        </div>
-    </div>
 
     <footer class="footer">
         <p>&copy; 2026 NEW ANURA STORES. All rights reserved. | Managed by Miyuru Witharana</p>
@@ -332,97 +312,6 @@
         document.querySelectorAll('.product-img-box video').forEach(vid => {
             vid.muted = true;
             vid.play().catch(() => {});
-        });
-
-        // Service Details Popup Modal logic
-        const serviceDetails = {
-            business: {
-                badge: "AGENCY & DISTRIBUTION",
-                title: "Business Representative",
-                subtitle: "ප්‍රමුඛ පෙළේ ව්‍යාපාරික සන්නාම නියෝජනය",
-                desc: "We act as an authorized sales and distribution partner for trusted national and international consumer brands across the Southern Province, ensuring reliable stock availability and professional market coverage.",
-                highlights: [
-                    "Authorized agency representation for leading FMCG & household brands",
-                    "Dedicated regional distribution network across Mawarala & Matara District",
-                    "Consistent supply chain support for retail partners"
-                ],
-                waText: "Hello New Anura Stores, I would like to inquire about your Business Representative / Agency services."
-            },
-            workforce: {
-                badge: "WHOLESALE & RETAIL",
-                title: "Wholesale And Retail Workforce",
-                subtitle: "තොග සහ සිල්ලර වෙළඳ සේවාව",
-                desc: "Equipped with an experienced customer-focused team, we serve both bulk buyers and everyday household shoppers with competitive pricing, genuine products, and fast service.",
-                highlights: [
-                    "Competitive wholesale pricing for shops, institutions, and events",
-                    "Wide range of daily essentials and quality consumer goods",
-                    "Friendly, experienced workforce committed to customer satisfaction"
-                ],
-                waText: "Hello New Anura Stores, I would like to inquire about Wholesale & Retail orders."
-            },
-            welfare: {
-                badge: "COMMUNITY & CULTURE",
-                title: "Social Welfare",
-                subtitle: "සමාජ සුභසාධන සහ සංස්කෘතික සේවාව",
-                desc: "Beyond commerce, New Anura Stores actively supports community upliftment, cultural and artistic initiatives, and charitable programs that strengthen society.",
-                highlights: [
-                    "Support for local arts, cultural programs, and youth talent",
-                    "Community welfare, donations, and disaster-relief assistance",
-                    "Long-standing commitment to social responsibility in Mawarala"
-                ],
-                waText: "Hello New Anura Stores, I would like to connect regarding your Social Welfare & Community programs."
-            }
-        };
-
-        const modal = document.getElementById("serviceModal");
-        const modalBadge = document.getElementById("modalBadge");
-        const modalTitle = document.getElementById("modalTitle");
-        const modalSubtitle = document.getElementById("modalSubtitle");
-        const modalDesc = document.getElementById("modalDesc");
-        const modalHighlights = document.getElementById("modalHighlights");
-        const modalWhatsappBtn = document.getElementById("modalWhatsappBtn");
-
-        function openServiceModal(key) {
-            const item = serviceDetails[key];
-            if (!item) return;
-
-            modalBadge.textContent = item.badge;
-            modalTitle.textContent = item.title;
-            modalSubtitle.textContent = item.subtitle;
-            modalDesc.textContent = item.desc;
-            modalHighlights.innerHTML = item.highlights
-                .map(point => `<li><i class="fas fa-check-circle"></i><span>${point}</span></li>`)
-                .join("");
-            modalWhatsappBtn.href = `https://wa.me/94412291221?text=${encodeURIComponent(item.waText)}`;
-
-            modal.classList.add("active");
-            modal.setAttribute("aria-hidden", "false");
-            document.body.style.overflow = "hidden";
-        }
-
-        function closeServiceModal() {
-            modal.classList.remove("active");
-            modal.setAttribute("aria-hidden", "true");
-            document.body.style.overflow = "";
-        }
-
-        document.querySelectorAll(".open-modal-btn").forEach(btn => {
-            btn.addEventListener("click", () => {
-                openServiceModal(btn.getAttribute("data-service"));
-            });
-        });
-
-        document.getElementById("closeModalBtn").addEventListener("click", closeServiceModal);
-        document.getElementById("modalDoneBtn").addEventListener("click", closeServiceModal);
-
-        modal.addEventListener("click", (e) => {
-            if (e.target === modal) closeServiceModal();
-        });
-
-        document.addEventListener("keydown", (e) => {
-            if (e.key === "Escape" && modal.classList.contains("active")) {
-                closeServiceModal();
-            }
         });
     </script>
 </body>
