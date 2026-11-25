@@ -50,6 +50,7 @@
             <ul class="nav-links">
                 <li><a href="#about" class="nav-link">About</a></li>
                 <li><a href="#products" class="nav-link">Products</a></li>
+                <li><a href="#careers" class="nav-link">Careers</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
         </nav>
@@ -199,8 +200,65 @@
             </div>
         </section>
 
+        <!-- Job Application / Careers Section -->
+        <section id="careers" class="section">
+            <div class="container">
+                <h2 class="section-title" data-aos="fade-up">Join Our Team · සේවක අයදුම්පත්</h2>
+                <div class="glass-card career-card" data-aos="fade-up">
+                    <p class="career-intro">
+                        Fill out the application below to apply for a vacancy at <strong>NEW ANURA STORES (Pvt) Ltd</strong>. Submitting opens a ready-to-send WhatsApp message directly to <strong>0766916480</strong>.
+                    </p>
+                    <form id="job-apply-form" class="career-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="applicant-name">Full Name / සම්පූර්ණ නම *</label>
+                                <input type="text" id="applicant-name" required placeholder="Enter full name">
+                            </div>
+                            <div class="form-group">
+                                <label for="applicant-phone">Contact Number / දුරකථන අංකය *</label>
+                                <input type="tel" id="applicant-phone" required placeholder="07X XXX XXXX">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="applicant-role">Position / අයදුම් කරන තනතුර *</label>
+                                <select id="applicant-role" required>
+                                    <option value="">Select a position</option>
+                                    <option value="Sales / Business Representative">Sales / Business Representative</option>
+                                    <option value="Wholesale & Retail Staff">Wholesale & Retail Staff</option>
+                                    <option value="Store / Stock Assistant">Store / Stock Assistant</option>
+                                    <option value="Cashier / Billing">Cashier / Billing</option>
+                                    <option value="Delivery / Helper">Delivery / Helper</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="applicant-age">Age / වයස</label>
+                                <input type="number" id="applicant-age" min="16" max="70" placeholder="e.g. 22">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="applicant-address">Address / ලිපිනය *</label>
+                            <input type="text" id="applicant-address" required placeholder="Town / Village, District">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="applicant-experience">Experience & Notes / පළපුරුද්ද සහ විස්තර</label>
+                            <textarea id="applicant-experience" rows="3" placeholder="Briefly share any work experience, qualifications, or availability..."></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-primary career-submit-btn">
+                            <i class="fab fa-whatsapp"></i> Send Application to 0766916480
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
         <!-- Contact & Business Info -->
-        <section id="contact" class="section">
+        <section id="contact" class="section bg-alt">
             <div class="container">
                 <h2 class="section-title" data-aos="fade-up">Find Us & Contact</h2>
                 <div class="contact-grid">
@@ -333,6 +391,34 @@
             vid.muted = true;
             vid.play().catch(() => {});
         });
+
+        // Job Application to WhatsApp (0766916480 -> 94766916480)
+        const jobForm = document.getElementById('job-apply-form');
+        if (jobForm) {
+            jobForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                const name = document.getElementById('applicant-name').value.trim();
+                const phone = document.getElementById('applicant-phone').value.trim();
+                const role = document.getElementById('applicant-role').value.trim();
+                const age = document.getElementById('applicant-age').value.trim();
+                const address = document.getElementById('applicant-address').value.trim();
+                const experience = document.getElementById('applicant-experience').value.trim();
+
+                const message = [
+                    "*NEW ANURA STORES - Job Application*",
+                    "---------------------------------",
+                    "*Name:* " + name,
+                    "*Phone:* " + phone,
+                    "*Position:* " + role,
+                    age ? "*Age:* " + age : null,
+                    "*Address:* " + address,
+                    experience ? "*Experience/Notes:* " + experience : null
+                ].filter(Boolean).join("\n");
+
+                const waUrl = "https://wa.me/94766916480?text=" + encodeURIComponent(message);
+                window.open(waUrl, "_blank", "noopener,noreferrer");
+            });
+        }
     </script>
 </body>
 
