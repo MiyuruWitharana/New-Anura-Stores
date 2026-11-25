@@ -347,13 +347,12 @@
 
     <script>
         /*
-         * IMPORTANT FOR FULL BACKEND / HIDDEN RECIPIENT DELIVERY:
-         * Connect APPS_SCRIPT_URL to your Google Apps Script / serverless endpoint so:
-         *  1) OTP is sent to the applicant's WhatsApp number server-side (and verified securely),
-         *  2) The 2-page application payload/document is sent privately to your receiving number
-         *     WITHOUT exposing your WhatsApp number anywhere in the frontend code.
+         * Connected Google Apps Script Web App Endpoint:
+         *  1) Sends & verifies OTP via WhatsApp Cloud API (server-side),
+         *  2) Sends the 2-page application summary & saves to Google Sheet
+         *     while keeping the internal recipient number hidden in Script Properties.
          */
-        const APPS_SCRIPT_URL = "";
+        const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwAFYVe7N-en3eGUnNJHDhEpThGXSlBbVyH1grZ1dkbrxW_8wlaqVKwAGmH3C-XMc32JQ/exec";
 
         // Scroll Progress
         window.onscroll = function () {
@@ -442,7 +441,6 @@
         });
 
         // OTP Logic
-        let generatedOtp = null;
         let isOtpVerified = false;
 
         const sendOtpBtn = document.getElementById('send-otp-btn');
@@ -453,7 +451,6 @@
 
         function resetOtpState() {
             isOtpVerified = false;
-            generatedOtp = null;
             submitAppBtn.disabled = true;
         }
 
@@ -469,30 +466,23 @@
             sendOtpBtn.disabled = true;
             sendOtpBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Sending...`;
 
-            if (APPS_SCRIPT_URL) {
-                try {
-                    const res = await fetch(APPS_SCRIPT_URL, {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ action: "send_otp", whatsapp: wa })
-                    });
-                    const data = await res.json();
-                    if (data.ok) {
-                        otpStatusMsg.className = "otp-status info";
-                        otpStatusMsg.textContent = `OTP sent to WhatsApp (${wa}). Enter the code to verify.`;
-                    } else {
-                        otpStatusMsg.className = "otp-status err";
-                        otpStatusMsg.textContent = data.message || "Could not send OTP. Please try again.";
-                    }
-                } catch (err) {
+            try {
+                const res = await fetch(APPS_SCRIPT_URL, {
+                    method: "POST",
+                    headers: { "Content-Type": "text/plain;charset=utf-8" },
+                    body: JSON.stringify({ action: "send_otp", whatsapp: wa })
+                });
+                const data = await res.json();
+                if (data.ok) {
+                    otpStatusMsg.className = "otp-status info";
+                    otpStatusMsg.textContent = `OTP sent to WhatsApp (${wa}). Enter the code to verify.`;
+                } else {
                     otpStatusMsg.className = "otp-status err";
-                    otpStatusMsg.textContent = "Network error while sending OTP.";
+                    otpStatusMsg.textContent = data.message || "Could not send OTP. Please try again.";
                 }
-            } else {
-                // Local/Preview fallback OTP generator until APPS_SCRIPT_URL is connected
-                generatedOtp = String(Math.floor(100000 + Math.random() * 900000));
-                otpStatusMsg.className = "otp-status info";
-                otpStatusMsg.textContent = `Preview OTP for ${wa}: ${generatedOtp} (Connect Apps Script for live WhatsApp delivery)`;
+            } catch (err) {
+                otpStatusMsg.className = "otp-status err";
+                otpStatusMsg.textContent = "Network error while sending OTP.";
             }
 
             sendOtpBtn.disabled = false;
@@ -508,41 +498,27 @@
                 return;
             }
 
-            if (APPS_SCRIPT_URL) {
-                try {
-                    const res = await fetch(APPS_SCRIPT_URL, {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ action: "verify_otp", whatsapp: wa, otp: entered })
-                    });
-                    const data = await res.json();
-                    if (data.verified) {
-                        isOtpVerified = true;
-                        submitAppBtn.disabled = false;
-                        otpStatusMsg.className = "otp-status ok";
-                        otpStatusMsg.textContent = "WhatsApp OTP verified! You can now submit your application.";
-                    } else {
-                        isOtpVerified = false;
-                        submitAppBtn.disabled = true;
-                        otpStatusMsg.className = "otp-status err";
-                        otpStatusMsg.textContent = "Invalid OTP. Please check and try again.";
-                    }
-                } catch (err) {
-                    otpStatusMsg.className = "otp-status err";
-                    otpStatusMsg.textContent = "Verification request failed.";
-                }
-            } else {
-                if (generatedOtp && entered === generatedOtp) {
+            try {
+                const res = await fetch(APPS_SCRIPT_URL, {
+                    method: "POST",
+                    headers: { "Content-Type": "text/plain;charset=utf-8" },
+                    body: JSON.stringify({ action: "verify_otp", whatsapp: wa, otp: entered })
+                });
+                const data = await res.json();
+                if (data.verified) {
                     isOtpVerified = true;
                     submitAppBtn.disabled = false;
                     otpStatusMsg.className = "otp-status ok";
-                    otpStatusMsg.textContent = "OTP verified! Click Submit to generate your 2-page application document.";
+                    otpStatusMsg.textContent = "WhatsApp OTP verified! You can now submit your application.";
                 } else {
                     isOtpVerified = false;
                     submitAppBtn.disabled = true;
                     otpStatusMsg.className = "otp-status err";
-                    otpStatusMsg.textContent = "Invalid OTP code.";
+                    otpStatusMsg.textContent = data.message || "Invalid OTP. Please check and try again.";
                 }
+            } catch (err) {
+                otpStatusMsg.className = "otp-status err";
+                otpStatusMsg.textContent = "Verification request failed.";
             }
         });
 
@@ -615,16 +591,14 @@
             document.getElementById('d-otpVerifiedBadge').textContent = `Verified (${payload.whatsappNo})`;
             document.getElementById('d-signName').textContent = payload.fullName;
 
-            if (APPS_SCRIPT_URL) {
-                try {
-                    await fetch(APPS_SCRIPT_URL, {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ action: "submit_application", application: payload })
-                    });
-                } catch (err) {
-                    console.error("Failed to dispatch application:", err);
-                }
+            try {
+                await fetch(APPS_SCRIPT_URL, {
+                    method: "POST",
+                    headers: { "Content-Type": "text/plain;charset=utf-8" },
+                    body: JSON.stringify({ action: "submit_application", application: payload })
+                });
+            } catch (err) {
+                console.error("Failed to dispatch application:", err);
             }
 
             fullJobForm.style.display = "none";
