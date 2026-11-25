@@ -10,6 +10,10 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <style>
+        .app-page { display: none; }
+        .app-page.active-page { display: block; }
+    </style>
 </head>
 
 <body>
@@ -346,23 +350,16 @@
     </footer>
 
     <script>
-        /*
-         * Connected Google Apps Script Web App Endpoint:
-         *  1) Sends & verifies OTP via WhatsApp Cloud API (server-side),
-         *  2) Sends the 2-page application summary & saves to Google Sheet
-         *     while keeping the internal recipient number hidden in Script Properties.
-         */
         const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxHcmHmSazzjC4c0b4a91ErI5dCipisqRCOS7bN0Vsl2ca4aK9NhvYbA39QIXbBzs7D/exec";
 
-        // Scroll Progress
         window.onscroll = function () {
             let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             let scrolled = height > 0 ? (winScroll / height) * 100 : 0;
-            document.getElementById("myBar").style.width = scrolled + "%";
+            const bar = document.getElementById("myBar");
+            if (bar) bar.style.width = scrolled + "%";
         };
 
-        // Live SLST Status
         function updateStatus() {
             const slNow = new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Colombo" }));
             const day = slNow.getDay();
@@ -404,7 +401,6 @@
         updateStatus();
         setInterval(updateStatus, 60000);
 
-        // Multi-page (Page 1 <-> Page 2) Navigation
         const page1 = document.getElementById('app-page-1');
         const page2 = document.getElementById('app-page-2');
         const stepBadge = document.getElementById('step-badge');
@@ -415,9 +411,11 @@
             const requiredIds = ['fullName', 'nicNo', 'dob', 'gender', 'whatsappNo', 'permAddress', 'currAddress', 'emergencyName', 'emergencyPhone'];
             for (const id of requiredIds) {
                 const el = document.getElementById(id);
-                if (!el.value.trim()) {
-                    el.focus();
-                    el.reportValidity();
+                if (!el || !el.value.trim()) {
+                    if (el) {
+                        el.focus();
+                        el.reportValidity();
+                    }
                     return false;
                 }
             }
@@ -440,7 +438,6 @@
             window.scrollTo({ top: 180, behavior: 'smooth' });
         });
 
-        // OTP Logic
         let isOtpVerified = false;
 
         const sendOtpBtn = document.getElementById('send-otp-btn');
@@ -522,7 +519,6 @@
             }
         });
 
-        // Submit & Build 2-Page Printable Document
         const fullJobForm = document.getElementById('full-job-form');
         const printableWrap = document.getElementById('printable-application-wrap');
 
@@ -563,7 +559,6 @@
                 refereeInfo: document.getElementById('refereeInfo').value.trim() || "—"
             };
 
-            // Populate 2-Page Document
             document.getElementById('doc-ref-1').textContent = payload.refNo;
             document.getElementById('doc-ref-2').textContent = payload.refNo;
             document.getElementById('doc-date-1').textContent = payload.submittedAt;
