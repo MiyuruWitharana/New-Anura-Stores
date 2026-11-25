@@ -258,7 +258,13 @@ html {
     font-weight: 800;
 }
 
-/* Proprietor Card */
+/* Leadership & Proprietor Cards */
+.leadership-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
 .owner-card {
     display: flex;
     align-items: center;
